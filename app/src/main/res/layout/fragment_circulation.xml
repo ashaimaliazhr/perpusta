@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.CirculationFragment"
+    android:fitsSystemWindows="true">
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/back_circulation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            android:background="@color/light_blue"
+            app:navigationIcon="@drawable/ic_baseline_arrow_back_ios_24">
+
+            <TextView
+                android:id="@+id/tvStatusPinjam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:text="@string/status_peminjaman"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+        </androidx.appcompat.widget.Toolbar>
+
+
+        <RelativeLayout
+            android:id="@+id/daftarBuku"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="10dp"
+                android:gravity="start|center"
+                android:layout_toStartOf="@id/animate"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/daftar_buku"
+                    android:layout_marginStart="20dp"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/cek_buku_dipinjam"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"/>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/animate"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:src="@drawable/animate" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/pinjamBuku"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/daftarBuku"
+            android:orientation="vertical"
+            android:background="@drawable/top_rounded_corner_bg">
+
+            <TextView
+                android:id="@+id/tvDaftarBuku"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/daftar_buku_dipinjam"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:padding="20dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/daftarPinjam"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:orientation="horizontal"
+                tools:listitem="@layout/item_borrow"
+                tools:layout_editor_absoluteX="24dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:layout_below="@id/pinjamBuku"
+            android:orientation="vertical"
+            android:background="@drawable/top_rounded_corner_bg">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/daftar_riwayat_peminjaman_buku"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:padding="20dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/riwayatPinjam"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:orientation="horizontal"
+                tools:listitem="@layout/item_borrow"
+                tools:layout_editor_absoluteX="24dp"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

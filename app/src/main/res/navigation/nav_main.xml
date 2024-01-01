@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.skripsi.perpusta.ui.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_circulationFragment"
+            app:destination="@id/circulationFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_reminderFragment"
+            app:destination="@id/reminderFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_fineFragment"
+            app:destination="@id/fineFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.skripsi.perpusta.ui.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.skripsi.perpusta.ui.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment2"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/circulationFragment"
+        android:name="com.skripsi.perpusta.ui.CirculationFragment"
+        android:label="fragment_circulation"
+        tools:layout="@layout/fragment_circulation" >
+        <action
+            android:id="@+id/action_circulationFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fineFragment"
+        android:name="com.skripsi.perpusta.ui.FineFragment"
+        android:label="fragment_fine"
+        tools:layout="@layout/fragment_fine" >
+        <action
+            android:id="@+id/action_fineFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reminderFragment"
+        android:name="com.skripsi.perpusta.ui.ReminderFragment"
+        android:label="fragment_reminder"
+        tools:layout="@layout/fragment_reminder" />
+</navigation>

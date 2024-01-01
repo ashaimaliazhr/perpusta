@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="5dp"
+    android:layout_marginVertical="10dp"
+    android:elevation="7dp"
+    android:translationZ="7dp"
+    app:cardCornerRadius="10dp">
+
+    <RelativeLayout
+        android:layout_width="150dp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/fine"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:contentDescription=""
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_fine" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fine"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/title"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/dueDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:layout_marginHorizontal="5dp"
+            android:text="@string/tanggal_kembali"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:layout_marginBottom="10dp"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/tvFine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dueDate"
+            android:layout_marginHorizontal="5dp"
+            android:text="@string/denda"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:layout_marginBottom="10dp"/>
+
+
+    </RelativeLayout>
+
+
+
+</androidx.cardview.widget.CardView>
