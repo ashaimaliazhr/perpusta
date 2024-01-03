@@ -1,22 +1,64 @@
 package com.skripsi.perpusta.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.skripsi.perpusta.R
+import com.skripsi.perpusta.data.datastore.SessionManager
+import com.skripsi.perpusta.viewmodel.CirculationViewModel
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
+    private lateinit var sessionManager: SessionManager
+
+    val circulationViewModel: CirculationViewModel by viewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        sessionManager = SessionManager(requireContext())
 
         val view = inflater.inflate(R.layout.fragment_home, container, false)
+
+        circulationViewModel.circulationHistoryLength.observe(viewLifecycleOwner, { length ->
+            Log.d("Home Fragment", "Observer triggered. Length: $length")
+            val tvPeminjaman = view.findViewById<TextView>(R.id.tvPeminjaman)
+            tvPeminjaman.text = "Jumlah Buku: $length"
+        })
+
+        circulationViewModel.circulationStatusLength.observe(viewLifecycleOwner, { length ->
+            val tvStatusKembali = view.findViewById<TextView>(R.id.tvStatusKembali)
+            tvStatusKembali.text = "Jumlah buku: $length"
+        })
+
+        circulationViewModel.circulationAccountLength.observe(viewLifecycleOwner, { length ->
+            val tvStatusDenda = view.findViewById<TextView>(R.id.tvStatusDenda)
+            tvStatusDenda.text = "Jumlah denda: $length"
+        })
+
+
+
+        lifecycleScope.launch {
+            //trigger API calls to update LiveData
+            val npm = sessionManager.getNpm() ?: ""
+
+            circulationViewModel.getCirculationHistory(npm)
+            circulationViewModel.getCirculationStatus(npm)
+            circulationViewModel.getCirculationAccount(npm)
+        }
+
 
         //set up bottom nav
         val bottomNavigationView = view.findViewById<BottomNavigationView>(R.id.bottomNavigation)
@@ -44,7 +86,35 @@ class HomeFragment : Fragment() {
             }
         }
 
+        sessionManager = SessionManager(requireContext())
+
+        val fullName = sessionManager.getFullName()
+        val tvNamaUser = view.findViewById<TextView>(R.id.tv_namaUser)
+        tvNamaUser.text = fullName
+
+        val logoutImageView = view.findViewById<ImageView>(R.id.logout)
+        logoutImageView.setOnClickListener{
+            showLogoutConfirmationDialog()
+        }
+
         return view
+    }
+
+    private fun showLogoutConfirmationDialog(){
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Confirmation Logout")
+            .setMessage("Are You Sure to Logout?")
+            .setPositiveButton("Yes") { _, _ ->
+                navigateToLogin()
+            }
+            .setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    private fun navigateToLogin() {
+        Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_loginFragment)
     }
 
 }

@@ -33,12 +33,22 @@
                     android:src="@drawable/ic_borrow" />
 
                 <TextView
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="@string/status_peminjaman"
                     android:textColor="@color/black"
                     android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvPeminjaman"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
 
                 <View
                     android:layout_width="match_parent"
@@ -75,6 +85,15 @@
                     android:text="@string/status_kembali"
                     android:textColor="@color/black"
                     android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvStatusKembali"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
 
                 <View
                     android:layout_width="match_parent"
@@ -116,6 +135,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="@string/denda"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvStatusDenda"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 

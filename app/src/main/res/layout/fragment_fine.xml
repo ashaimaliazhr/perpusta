@@ -21,6 +21,7 @@
            android:orientation="vertical">
 
            <androidx.appcompat.widget.Toolbar
+               android:id="@+id/back_fine"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginBottom="25dp"
@@ -51,7 +52,7 @@
                    android:layout_width="80dp"
                    android:layout_height="80dp"
                    android:layout_margin="16dp"
-                   tools:src="@drawable/avatar"
+                   android:src="@drawable/avatar"
                    app:layout_constraintStart_toStartOf="parent"
                    app:layout_constraintTop_toTopOf="parent"/>
 
@@ -136,8 +137,6 @@
                    tools:listitem="@layout/item_fine">
 
                </androidx.recyclerview.widget.RecyclerView>
-
-
 
 
            </LinearLayout>

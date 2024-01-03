@@ -12,4 +12,8 @@ data class LoginResponse(
     @SerializedName("token")
     @Expose
     val token: String? = null,
+
+    @SerializedName("user")
+    @Expose
+    val user: User? = null
 )

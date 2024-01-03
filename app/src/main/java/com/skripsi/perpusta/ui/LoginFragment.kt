@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.skripsi.perpusta.R
+import com.skripsi.perpusta.data.datastore.SessionManager
 import com.skripsi.perpusta.data.network.RemoteDataSource
 import com.skripsi.perpusta.databinding.FragmentLoginBinding
 import com.skripsi.perpusta.repository.AuthRepository
@@ -66,6 +67,15 @@ class LoginFragment : Fragment() {
 
             when (result) {
                     is Result.Success -> {
+                        val user = result.data
+
+                        val userId = user.user?.iD ?: ""
+                        val token = result.data.token ?: ""
+                        val fullName = user.user?.fName ?: ""
+
+                        val sessionManager = SessionManager(requireContext())
+                        sessionManager.saveUserData(userId, token, fullName)
+
                         LoginDialogFragment.show(parentFragmentManager)
 
                         view?.postDelayed({
