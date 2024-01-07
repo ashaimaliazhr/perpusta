@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.skripsi.perpusta.data.network.RemoteDataSource
+import com.skripsi.perpusta.model.circulation.CirculationRequest
 import com.skripsi.perpusta.model.circulation.history.Data
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -54,7 +55,7 @@ class CirculationViewModel : ViewModel(){
     suspend fun getCirculationStatus(npm: String) {
         try {
             val response = withContext(Dispatchers.IO) {
-                remoteDataSource.createApiService().getCirculationStatus(npm)
+                remoteDataSource.createApiService().getCirculationStatus(CirculationRequest(npm))
             }
             if (response.isSuccessful) {
                 _circulationStatusLength.value = response.body()?.length ?: 0
@@ -69,7 +70,7 @@ class CirculationViewModel : ViewModel(){
     suspend fun getCirculationAccount(npm: String) {
         try {
             val response = withContext(Dispatchers.IO) {
-                remoteDataSource.createApiService().getCirculationAccount(npm)
+                remoteDataSource.createApiService().getCirculationAccount(CirculationRequest(npm))
             }
             if (response.isSuccessful) {
                 _circulationAccountLength.value = response.body()?.length ?: 0

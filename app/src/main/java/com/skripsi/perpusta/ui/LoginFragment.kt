@@ -86,6 +86,9 @@ class LoginFragment : Fragment() {
                     is Result.Failure -> {
                     Toast.makeText(requireContext(), "Login failed", Toast.LENGTH_SHORT).show()
                 }
+                else -> {
+
+                }
             }
         })
 

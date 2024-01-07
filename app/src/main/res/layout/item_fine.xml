@@ -5,12 +5,13 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="5dp"
     android:layout_marginVertical="10dp"
+    android:layout_margin="8dp"
     android:elevation="7dp"
     android:translationZ="7dp"
     app:cardCornerRadius="10dp">
 
-    <RelativeLayout
-        android:layout_width="150dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
@@ -19,45 +20,54 @@
             android:layout_height="80dp"
             android:contentDescription=""
             android:scaleType="fitXY"
-            android:src="@drawable/ic_fine" />
+            android:src="@drawable/ic_fine"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
+            android:id="@+id/tvTitleBook"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_below="@id/fine"
             android:layout_marginHorizontal="5dp"
-            android:layout_marginTop="15dp"
             android:text="@string/title"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/fine"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
-            android:id="@+id/dueDate"
+            android:id="@+id/tvDueDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/title"
-            android:layout_marginHorizontal="5dp"
+            android:layout_marginTop="4dp"
+            android:layout_below="@id/tvTitleBook"
             android:text="@string/tanggal_kembali"
             android:textColor="@color/black"
             android:textSize="14sp"
-            android:layout_marginBottom="10dp"
-            android:layout_centerHorizontal="true"/>
+            app:layout_constraintTop_toBottomOf="@id/tvTitleBook"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
             android:id="@+id/tvFine"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/dueDate"
-            android:layout_marginHorizontal="5dp"
+            android:layout_below="@id/tvDueDate"
+            android:layout_marginTop="4dp"
             android:text="@string/denda"
             android:textColor="@color/black"
             android:textSize="14sp"
-            android:layout_marginBottom="10dp"/>
+            app:layout_constraintTop_toBottomOf="@id/tvDueDate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

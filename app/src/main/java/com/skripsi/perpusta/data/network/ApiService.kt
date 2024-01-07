@@ -1,11 +1,14 @@
 package com.skripsi.perpusta.data.network
 
+import com.skripsi.perpusta.model.circulation.CirculationRequest
 import com.skripsi.perpusta.model.circulation.account.AccountResponse
 import com.skripsi.perpusta.model.circulation.history.HistoryResponse
 import com.skripsi.perpusta.model.circulation.status.StatusResponse
 import com.skripsi.perpusta.model.login.LoginResponse
 import com.skripsi.perpusta.model.users.UserResponse
+import retrofit2.Call
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -34,16 +37,22 @@ interface ApiService {
         @Field("npm") npm: String
     ): Response<HistoryResponse>
 
-    @FormUrlEncoded
+//    @FormUrlEncoded
+//    @POST("circulation/status")
+//    suspend fun getCirculationStatus(
+//        @Field("npm") npm: String
+//    ): Response<StatusResponse>
+
+
     @POST("circulation/status")
-    suspend fun getCirculationStatus(
-        @Field("npm") npm: String
+    fun getCirculationStatus(
+        @Body req: CirculationRequest
     ): Response<StatusResponse>
 
-    @FormUrlEncoded
+
     @POST("circulation/account")
     suspend fun getCirculationAccount(
-        @Field("npm") npm: String
+       @Body req: CirculationRequest
     ): Response<AccountResponse>
 
 }

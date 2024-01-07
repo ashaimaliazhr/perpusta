@@ -96,7 +96,7 @@
                 android:padding="20dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/daftarPinjam"
+                android:id="@+id/rvDaftarPinjam"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginStart="24dp"
@@ -124,13 +124,13 @@
                 android:padding="20dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/riwayatPinjam"
+                android:id="@+id/rvRiwayatPinjam"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
                 android:orientation="horizontal"
-                tools:listitem="@layout/item_borrow"
+                tools:listitem="@layout/item_history"
                 tools:layout_editor_absoluteX="24dp"/>
 
         </LinearLayout>

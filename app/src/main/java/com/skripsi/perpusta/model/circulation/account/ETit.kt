@@ -5,7 +5,8 @@ import com.google.gson.annotations.SerializedName
 
 data class ETit(
     @SerializedName("TitId")
-    val titId: Int?,
+    val titId: Int? = null,
+
     @SerializedName("TitKey")
-    val titKey: String?
+    val titKey: String? = null
 )

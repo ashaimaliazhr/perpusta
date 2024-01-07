@@ -5,11 +5,14 @@ import com.google.gson.annotations.SerializedName
 
 data class EBib(
     @SerializedName("BibId")
-    val bibId: Int?,
+    val bibId: Int? = null,
+
     @SerializedName("CalKey")
-    val calKey: String?,
+    val calKey: String? = null,
+
     @SerializedName("EdiRaw")
-    val ediRaw: String?,
+    val ediRaw: String? = null,
+
     @SerializedName("PubRaw")
-    val pubRaw: String?
+    val pubRaw: String? = null
 )

@@ -9,4 +9,5 @@ sealed class Result<out T> {
         val errorCode: Int?,
         val errorBody: ResponseBody?
         ) : Result<Nothing>()
+    data class Error(val exception: Exception) : Result<Nothing>()
 }

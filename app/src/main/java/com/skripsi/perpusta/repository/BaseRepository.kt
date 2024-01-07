@@ -27,4 +27,22 @@ abstract class BaseRepository {
         }
     }
 
+    suspend fun <T : Any> safeApiCallWithResponse(
+        apiCall: suspend () -> Response<T>
+    ): Result<T> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = apiCall.invoke()
+
+                if (response.isSuccessful) {
+                    Result.Success(response.body()!!)
+                } else {
+                    Result.Failure(false, response.code(), response.errorBody())
+                }
+            } catch (throwable: Throwable) {
+                Result.Failure(true, null, null)
+            }
+        }
+    }
+
 }
