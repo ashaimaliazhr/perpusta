@@ -45,7 +45,7 @@ interface ApiService {
 
 
     @POST("circulation/status")
-    fun getCirculationStatus(
+    suspend fun getCirculationStatus(
         @Body req: CirculationRequest
     ): Response<StatusResponse>
 
