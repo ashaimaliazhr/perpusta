@@ -10,18 +10,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.skripsi.perpusta.R
 import com.skripsi.perpusta.data.datastore.SessionManager
 import com.skripsi.perpusta.viewmodel.CirculationViewModel
-import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
     private lateinit var sessionManager: SessionManager
-
     val circulationViewModel: CirculationViewModel by viewModels()
+    private lateinit var loggedInNpm: String
 
 
     override fun onCreateView(
@@ -31,34 +29,6 @@ class HomeFragment : Fragment() {
         sessionManager = SessionManager(requireContext())
 
         val view = inflater.inflate(R.layout.fragment_home, container, false)
-
-        circulationViewModel.circulationHistoryLength.observe(viewLifecycleOwner, { length ->
-            Log.d("Home Fragment", "Observer triggered. Length: $length")
-            val tvPeminjaman = view.findViewById<TextView>(R.id.tvPeminjaman)
-            tvPeminjaman.text = "Jumlah Buku: $length"
-        })
-
-        circulationViewModel.circulationStatusLength.observe(viewLifecycleOwner, { length ->
-            val tvStatusKembali = view.findViewById<TextView>(R.id.tvStatusKembali)
-            tvStatusKembali.text = "Jumlah buku: $length"
-        })
-
-        circulationViewModel.circulationAccountLength.observe(viewLifecycleOwner, { length ->
-            val tvStatusDenda = view.findViewById<TextView>(R.id.tvStatusDenda)
-            tvStatusDenda.text = "Jumlah denda: $length"
-        })
-
-
-
-        lifecycleScope.launch {
-            //trigger API calls to update LiveData
-            val npm = sessionManager.getNpm() ?: ""
-
-            circulationViewModel.getCirculationHistory(npm)
-            circulationViewModel.getCirculationStatus(npm)
-            circulationViewModel.getCirculationAccount(npm)
-        }
-
 
         //set up bottom nav
         val bottomNavigationView = view.findViewById<BottomNavigationView>(R.id.bottomNavigation)
@@ -98,6 +68,37 @@ class HomeFragment : Fragment() {
         }
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        sessionManager = SessionManager(requireContext())
+        loggedInNpm = sessionManager.getUserId() ?: ""
+
+        circulationViewModel.circulationHistoryLength.observe(viewLifecycleOwner, { length ->
+            Log.d("Home Fragment", "Observer triggered. Length: $length")
+            val tvPeminjaman = view.findViewById<TextView>(R.id.tvPeminjaman)
+            tvPeminjaman.text = "Jumlah Buku: $length"
+        })
+
+        circulationViewModel.getCirculationHistory(loggedInNpm)
+
+        circulationViewModel.circulationStatusLength.observe(viewLifecycleOwner, { length ->
+            val tvStatusKembali = view.findViewById<TextView>(R.id.tvStatusKembali)
+            tvStatusKembali.text = "Jumlah buku: $length"
+        })
+
+        circulationViewModel.getCirculationStatus(loggedInNpm)
+
+        circulationViewModel.circulationAccountLength.observe(viewLifecycleOwner, { length ->
+            val tvStatusDenda = view.findViewById<TextView>(R.id.tvStatusDenda)
+            tvStatusDenda.text = "Jumlah Buku didenda: $length"
+        })
+
+        circulationViewModel.getCirculationAccount(loggedInNpm)
+
+
     }
 
     private fun showLogoutConfirmationDialog(){

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="basket_card_height">140dp</dimen>
+
+    <dimen name="card_corner_radius_medium">8dp</dimen>
+    <dimen name="card_corner_radius_small">10dp</dimen>
+    <dimen name="card_elevation">10dp</dimen>
+    <dimen name="card_elevation_small">6dp</dimen>
+
+    <dimen name="padding_big">16dp</dimen>
+    <dimen name="padding_medium">10dp</dimen>
+    <dimen name="padding_medium_small">8dp</dimen>
+    <dimen name="padding_small">4dp</dimen>
+
+    <dimen name="text_size_biggest">36sp</dimen>
+    <dimen name="text_size_very_big">24sp</dimen>
+    <dimen name="text_size_big">20sp</dimen>
+    <dimen name="text_size_medium">16sp</dimen>
+    <dimen name="text_size_small">11sp</dimen>
+    <dimen name="text_size_very_small">10sp</dimen>
+
+    <dimen name="margin_incredible">150dp</dimen>
+    <dimen name="margin_biggest">75dp</dimen>
+    <dimen name="margin_very_big">32dp</dimen>
+    <dimen name="margin_big">24dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_very_small">4dp</dimen>
+
+</resources>

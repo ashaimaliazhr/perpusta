@@ -34,8 +34,8 @@ class ItemBorrowAdapter(
             val circulationItem = circulationList[position]
 
             holder.tvTitleStatus.text = circulationItem?.cItem?.eTitBib?.eTit?.titKey
-            holder.tvTanggalPinjam.text = circulationItem?.chkODate
-            holder.tvTanggalKembali.text = circulationItem?.dueDate
+            holder.tvTanggalPinjam.text = ("Tanggal Pinjam: " + circulationItem?.chkODate)
+            holder.tvTanggalKembali.text = ("Tenggat Waktu: " + circulationItem?.dueDate)
 
             Log.d("ItemBorrowAdapter", "Title: ${circulationItem?.cItem?.eTitBib?.eTit?.titKey}")
             Log.d("ItemBorrowAdapter", "ChkODate: ${circulationItem?.chkODate}")

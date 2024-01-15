@@ -42,8 +42,8 @@ class FineAdapter(
             Log.d("FineAdapter", "Due Date: ${circulationItem?.chkODate}")
             Log.d("FineAdapter", "Fine Amount: ${circulationItem?.fineAmnt}")
             holder.tvTitleBook.text = circulationItem?.cItem?.eTitBib?.eTit?.titKey
-            holder.tvDueDate.text = circulationItem?.chkODate
-            holder.tvFine.text = circulationItem?.fineAmnt.toString()
+            holder.tvDueDate.text = ("Tanggal Pinjam: " + circulationItem?.chkODate)
+            holder.tvFine.text = ("Denda Rp." + circulationItem?.fineAmnt.toString())
         }
     }
 

@@ -1,68 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/white"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="16dp">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/borrow"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/agenda"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/basket_card_height"
+        android:layout_margin="@dimen/margin_medium"
+        app:cardBackgroundColor="@color/peachcream"
+        app:cardCornerRadius="@dimen/card_corner_radius_small"
+        app:cardElevation="@dimen/card_elevation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        >
 
-    <TextView
-        android:id="@+id/tvJudulBuku"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/judul_buku"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="8dp"
-        android:textSize="12sp"
-        android:textColor="@color/blue"
-        app:layout_constraintBottom_toTopOf="@id/tvPenerbit"
-        app:layout_constraintStart_toEndOf="@id/borrow"
-        app:layout_constraintTop_toTopOf="parent"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
 
-    <TextView
-        android:id="@+id/tvPenerbit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        android:text=""
-        app:layout_constraintBottom_toTopOf="@id/tvTanggalPinjam"
-        app:layout_constraintStart_toEndOf="@id/borrow"
-        app:layout_constraintTop_toBottomOf="@id/tvJudulBuku"/>
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.6"
+                android:padding="@dimen/padding_medium">
 
-    <TextView
-        android:id="@+id/tvTanggalPinjam"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        android:text="@string/tanggal_pinjam"
-        app:layout_constraintBottom_toTopOf="@id/tvTanggalKembali"
-        app:layout_constraintStart_toEndOf="@id/borrow" />
+                <ImageView
+                    android:id="@+id/bookBasketImageView"
+                    android:src="@drawable/stack_book"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:contentDescription="@string/book_image_description" />
+            </FrameLayout>
 
-    <TextView
-        android:id="@+id/tvTanggalKembali"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        android:text="@string/tanggal_kembali"
-        app:layout_constraintStart_toEndOf="@id/borrow"
-        app:layout_constraintTop_toBottomOf="@id/tvTanggalPinjam"
-        />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/margin_big"
+                android:layout_weight="0.8"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvTitleHistory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/margin_very_small"
+                    android:text="@string/judul_buku"
+                    android:textAllCaps="true"
+                    android:textAlignment="center"
+                    android:textColor="@color/eden"
+                    android:textSize="@dimen/text_size_small"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvChkODate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:text="@string/tanggal_pinjam"
+                    android:textAllCaps="false"
+                    android:textColor="@color/eden"
+                    android:textSize="@dimen/text_size_very_small" />
+
+                <TextView
+                    android:id="@+id/tvDueDateHistory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/margin_very_small"
+                    android:text= "@string/tanggal_kembali"
+                    android:textAllCaps="false"
+                    android:textColor="@color/eden"
+                    android:textSize="@dimen/text_size_very_small" />
+
+                <TextView
+                    android:id="@+id/tvChkIDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/margin_very_small"
+                    android:text="@string/tanggal_selesai"
+                    android:textAllCaps="false"
+                    android:textColor="@color/eden"
+                    android:textSize="@dimen/text_size_very_small" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/bookBasketDelete"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
+                android:background="@color/chardonnay"
+                android:contentDescription="@string/book_image_description"
+                android:padding="@dimen/padding_small"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

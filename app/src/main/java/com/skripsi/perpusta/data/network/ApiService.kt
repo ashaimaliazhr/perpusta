@@ -31,10 +31,10 @@ interface ApiService {
         @Query("npm") npm: String
     ): Response<UserResponse>
 
-    @FormUrlEncoded
+   
     @POST("circulation/history")
     suspend fun getCirculationHistory(
-        @Field("npm") npm: String
+        @Body req: CirculationRequest
     ): Response<HistoryResponse>
 
 //    @FormUrlEncoded

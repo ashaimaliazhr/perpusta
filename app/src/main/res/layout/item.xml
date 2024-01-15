@@ -59,15 +59,17 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    />
+                   />
 
                 <TextView
                     android:id="@+id/tvDueDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_very_small"
+                    android:gravity="center"
                     android:lines="2"
                     android:text="tanggal pinjam"
+                    android:textAlignment="center"
                     android:textColor="@color/eden"
                     android:textSize="@dimen/text_size_very_small"
                     app:layout_constraintEnd_toEndOf="parent"

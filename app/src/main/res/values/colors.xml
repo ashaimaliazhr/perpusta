@@ -11,4 +11,9 @@
     <color name="background_color">#E5EDF2</color>
     <color name="blue">#2C72A0</color>
     <color name="light_blue">#49A0D8</color>
+    <color name="eden">#104E5B</color>
+    <color name="chardonnay">#FFB052</color>
+    <color name="peachcream">#FFEFDB</color>
+    <color name="aquahaze">#F2F6F7</color>
+    <color name="midnight_blue">#032541</color>
 </resources>

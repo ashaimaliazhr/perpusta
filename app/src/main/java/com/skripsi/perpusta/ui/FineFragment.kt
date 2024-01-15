@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
@@ -49,6 +50,10 @@ class FineFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val recyclerView: RecyclerView = view.findViewById(R.id.rvListDenda)
+        val emptyImageView: ImageView = view.findViewById(R.id.empty_image)
+        val emptyMessageTextView: TextView = view.findViewById(R.id.emptyMessage)
+
+
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         fineAdapter = FineAdapter(fineViewModel.circulationList)
@@ -57,7 +62,17 @@ class FineFragment : Fragment() {
         fineViewModel.circulationList.observe(viewLifecycleOwner) { circulationList ->
             Log.d("FineFragment", "Observer triggered. Length: ${circulationList.size}")
             Log.d("FineFragment", "Elements: $circulationList")
-            fineAdapter.submitList(circulationList)
+
+            if (circulationList.isEmpty()) {
+                emptyImageView.visibility = View.VISIBLE
+                emptyMessageTextView.visibility = View.VISIBLE
+                recyclerView.visibility = View.GONE
+            } else {
+                emptyImageView.visibility = View.GONE
+                emptyMessageTextView.visibility = View.GONE
+                recyclerView.visibility = View.VISIBLE
+                fineAdapter.submitList(circulationList)
+            }
         }
 
         fineViewModel.loadData(loggedInNpm)

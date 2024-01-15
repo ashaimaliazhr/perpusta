@@ -4,81 +4,99 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.skripsi.perpusta.data.network.RemoteDataSource
 import com.skripsi.perpusta.model.circulation.CirculationRequest
-import com.skripsi.perpusta.model.circulation.history.Data
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import com.skripsi.perpusta.model.circulation.account.AccountResponse
+import com.skripsi.perpusta.model.circulation.history.HistoryResponse
+import com.skripsi.perpusta.model.circulation.status.StatusResponse
+import kotlinx.coroutines.launch
 
 class CirculationViewModel : ViewModel(){
 
-    private val _errorMessage = MutableLiveData<String>()
-    val errorMessage: LiveData<String> = _errorMessage
-
-    private val _circulationHistory = MutableLiveData<List<Data>>()
-    val circulationHistory: LiveData<List<Data>> = _circulationHistory
-
     private val _circulationHistoryLength = MutableLiveData<Int>()
-    val circulationHistoryLength: LiveData<Int> = _circulationHistoryLength
+    val circulationHistoryLength: LiveData<Int> get() = _circulationHistoryLength
 
     private val _circulationStatusLength = MutableLiveData<Int>()
-    val circulationStatusLength: LiveData<Int> = _circulationStatusLength
+    val circulationStatusLength: LiveData<Int> get() = _circulationStatusLength
+
+//    private val _circulationAccountLength = MutableLiveData<List<AccountResponse?>>()
+//    val circulationAccountLength: LiveData<List<AccountResponse?>> get() = _circulationAccountLength
 
     private val _circulationAccountLength = MutableLiveData<Int>()
-    val circulationAccountLength : LiveData<Int> = _circulationAccountLength
+    val circulationAccountLength: LiveData<Int> get() = _circulationAccountLength
 
-    private val remoteDataSource = RemoteDataSource()
+    fun getCirculationHistory(npm:  String) {
+        val circulationRequest = CirculationRequest(npm = npm)
+        viewModelScope.launch {
+            try {
+                val apiService = RemoteDataSource().createApiService()
+                val response = apiService.getCirculationHistory(circulationRequest)
 
-    suspend fun getCirculationHistory(npm: String) {
-        try {
-            val response = withContext(Dispatchers.IO) {
-                remoteDataSource.createApiService().getCirculationHistory(npm)
-            }
-            if (response.isSuccessful) {
-                val historyResponse = response.body()
-
-                historyResponse?.let {
-                    _circulationHistory.value = it.data?.filterNotNull() ?: emptyList()
-
-                    _circulationHistoryLength.value = it.length ?: 0
+                if (response.isSuccessful) {
+                    val historyResponse = response.body()
+                    if (historyResponse != null) {
+                        val historyLength = historyResponse.length ?: 0
+                        _circulationHistoryLength.value = historyLength
+                    } else {
+                        Log.e("CirculationViewModel", "EmptyResponse or missing length")
+                    }
+                } else {
+                    Log.e("CirculationViewModel", "API error: ${response.message()}")
                 }
-            } else {
-                //Handle API Error
-                _errorMessage.value = "Error: ${response.message()}"
+            } catch (e: Exception) {
+                Log.e("CirculationViewModel", "Error: ${e.message}" , e)
             }
-        }catch (e: Exception) {
-            //handle network
-            _errorMessage.value = "Error: ${e.message}"
         }
     }
 
-    suspend fun getCirculationStatus(npm: String) {
-        try {
-            val response = withContext(Dispatchers.IO) {
-                remoteDataSource.createApiService().getCirculationStatus(CirculationRequest(npm))
+    fun getCirculationStatus(npm:  String) {
+        val circulationRequest = CirculationRequest(npm = npm)
+        viewModelScope.launch {
+            try {
+                val apiService = RemoteDataSource().createApiService()
+                val response = apiService.getCirculationStatus(circulationRequest)
+
+                if (response.isSuccessful) {
+                    val statusResponse = response.body()
+                    if (statusResponse != null) {
+                        val statusLength = statusResponse.length ?: 0
+                        _circulationStatusLength.value = statusLength
+                    } else {
+                        Log.e("CirculationViewModel", "EmptyResponse or missing length")
+                    }
+                } else {
+                    Log.e("CirculationViewModel", "API error: ${response.message()}")
+                }
+            } catch (e: Exception) {
+                Log.e("CirculationViewModel", "Error: ${e.message}" , e)
             }
-            if (response.isSuccessful) {
-                _circulationStatusLength.value = response.body()?.length ?: 0
-            } else {
-                _errorMessage.value = "Error: ${response.message()}"
-            }
-        }catch (e: Exception) {
-            _errorMessage.value = "Error: ${e.message}"
         }
     }
 
-    suspend fun getCirculationAccount(npm: String) {
-        try {
-            val response = withContext(Dispatchers.IO) {
-                remoteDataSource.createApiService().getCirculationAccount(CirculationRequest(npm))
+    fun getCirculationAccount(npm:  String) {
+        val circulationRequest = CirculationRequest(npm = npm)
+        viewModelScope.launch {
+            try {
+                val apiService = RemoteDataSource().createApiService()
+                val response = apiService.getCirculationAccount(circulationRequest)
+
+                if (response.isSuccessful) {
+                    val accountResponse = response.body()
+                    if (accountResponse != null) {
+                        val accountLength = accountResponse.length ?: 0
+                        _circulationAccountLength.value = accountLength
+                    } else {
+                        Log.e("CirculationViewModel", "EmptyResponse or missing length")
+                    }
+                } else {
+                    Log.e("CirculationViewModel", "API error: ${response.message()}")
+                }
+            } catch (e: Exception) {
+                Log.e("CirculationViewModel", "Error: ${e.message}" , e)
             }
-            if (response.isSuccessful) {
-                _circulationAccountLength.value = response.body()?.length ?: 0
-            } else {
-                _errorMessage.value = "Error: ${response.message()}"
-            }
-        }catch (e: Exception) {
-            _errorMessage.value = "Error: ${e.message}"
         }
     }
+
+
 }
