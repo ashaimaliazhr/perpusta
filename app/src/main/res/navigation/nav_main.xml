@@ -67,5 +67,21 @@
         <action
             android:id="@+id/action_reminderFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_reminderFragment_to_addTaskFragment"
+            app:destination="@id/addTaskFragment">
+            <argument
+                android:name="taskId"
+                app:argType="integer" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/addTaskFragment"
+        android:name="com.skripsi.perpusta.ui.AddTaskFragment"
+        android:label="fragment_add_task"
+        tools:layout="@layout/fragment_add_task" >
+        <action
+            android:id="@+id/action_addTaskFragment_to_reminderFragment"
+            app:destination="@id/reminderFragment" />
     </fragment>
 </navigation>

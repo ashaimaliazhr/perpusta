@@ -4,6 +4,9 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Perpusta"
         android:usesCleartextTraffic="true"
-        tools:targetApi="33">
+        tools:targetApi="33"
+        android:enableOnBackInvokedCallback="true">
         <activity
             android:name=".ui.HomeActivity"
             android:exported="false">
@@ -36,6 +40,15 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <receiver
+            android:name=".extensions.ReminderBroadcastReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.skripsi.perpusta.REMINDER_ACTION" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

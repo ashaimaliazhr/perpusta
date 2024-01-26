@@ -10,7 +10,7 @@ class RemoteDataSource {
 
     companion object {
 //        private const val BASE_URL = "http://192.168.124.209:4000/"
-            private const val BASE_URL = "http://192.168.9.209:4000/"
+            private const val BASE_URL = "http://192.168.104.209:4000/"
 
     }
 

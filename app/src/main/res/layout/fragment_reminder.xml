@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_reminder"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.ReminderFragment">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/back_fine"
+        android:id="@+id/back_reminder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="25dp"
@@ -15,7 +16,7 @@
         android:background="@color/light_blue"
         app:navigationIcon="@drawable/ic_baseline_arrow_back_ios_24"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/someOtherView">
+        app:layout_constraintBottom_toTopOf="@+id/container">
 
         <TextView
             android:id="@+id/textTitle"
@@ -30,12 +31,12 @@
             android:textStyle="bold"/>
     </androidx.appcompat.widget.Toolbar>
 
-    <View
-        android:id="@+id/someOtherView"
+    <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/back_fine"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/back_reminder"
+        app:layout_constraintBottom_toBottomOf="parent">
 
     <include
         android:id="@+id/empty_include"
@@ -44,13 +45,15 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvTask"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/fab"
-        app:layout_constraintTop_toBottomOf="@+id/back_fine"
+        app:layout_constraintTop_toBottomOf="@+id/back_reminder"
         tools:listitem="@layout/item_task"
-        android:visibility="gone"/>
+        android:visibility="visible"/>
+
+    </FrameLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

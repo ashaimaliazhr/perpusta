@@ -37,6 +37,8 @@
     <string name="time">waktu</string>
     <string name="cancel">Kembali</string>
     <string name="timer">Jam</string>
+    <string name="to_edit">Edit</string>
+    <string name="delete">Hapus</string>
     <string name="new_task">New Task</string>
     <string name="empty_task">Ups! Anda tidak memiliki \n reminder yang harus diselesaikan hari ini</string>
     <string name="cek_buku_dipinjam">cek buku yang Kamu pinjam di Perpustakaan</string>

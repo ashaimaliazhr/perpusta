@@ -3,6 +3,9 @@ package com.skripsi.perpusta.data.datastore
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
+import androidx.lifecycle.LiveData
+import com.skripsi.perpusta.data.room.TaskDao
+import com.skripsi.perpusta.data.room.TaskEntity
 
 class SessionManager (context: Context) {
     private val sharedPreferences : SharedPreferences =
@@ -37,5 +40,16 @@ class SessionManager (context: Context) {
 
     fun getNpm(): String? {
         return sharedPreferences.getString(KEY_NPM, null)
+    }
+
+    fun getTasksForLoggedInUser(taskDao: TaskDao): LiveData<List<TaskEntity>> {
+        val loggedInUserId = getUserId()
+        return taskDao.getAllTasks()
+    }
+
+    fun setLoggedInUserId(userId: String) {
+        sharedPreferences.edit {
+            putString(KEY_USER_ID, userId)
+        }
     }
 }
