@@ -26,7 +26,6 @@ class SplashFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSplashBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
@@ -34,7 +33,6 @@ class SplashFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         navController = Navigation.findNavController(view)
-
         (activity as AppCompatActivity?)!!.supportActionBar?.hide()
 
         ObjectAnimator.ofPropertyValuesHolder(

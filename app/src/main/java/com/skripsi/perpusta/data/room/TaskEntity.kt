@@ -8,6 +8,7 @@ data class TaskEntity(
     val title: String,
     val hour: String,
     val date: String,
+    val userId:String,
     val reminderTime: Long,
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,

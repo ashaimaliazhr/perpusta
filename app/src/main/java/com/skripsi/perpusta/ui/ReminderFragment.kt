@@ -14,18 +14,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.skripsi.perpusta.R
 import com.skripsi.perpusta.adapter.TaskListAdapter
+import com.skripsi.perpusta.data.datastore.SessionManager
 import com.skripsi.perpusta.data.room.AddTaskListener
 import com.skripsi.perpusta.data.room.TaskEntity
 import com.skripsi.perpusta.databinding.FragmentReminderBinding
 import com.skripsi.perpusta.viewmodel.TaskViewModel
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class ReminderFragment : Fragment(), AddTaskListener {
 
     private lateinit var binding: FragmentReminderBinding
     private lateinit var taskListAdapter: TaskListAdapter
     private lateinit var taskViewModel: TaskViewModel
+    private lateinit var sessionManager: SessionManager
 
     private lateinit var listener: AddTaskListener
 
@@ -40,6 +40,8 @@ class ReminderFragment : Fragment(), AddTaskListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        sessionManager = SessionManager(requireContext())
 
         taskViewModel = ViewModelProvider(this).get(TaskViewModel::class.java)
 
@@ -67,17 +69,36 @@ class ReminderFragment : Fragment(), AddTaskListener {
         }
     }
 
+//    private fun observeTaskList() {
+//       taskViewModel.allTasks.observe(viewLifecycleOwner, Observer { tasks ->
+//           tasks?.let {
+//               Log.d("ReminderFragment", "Number of tasks: ${it.size}")
+//               if(it.isEmpty()) {
+//                   showEmptyTaskView()
+//               } else {
+//                   showRecyclerView(it)
+//               }
+//           }
+//       })
+//    }
+
     private fun observeTaskList() {
-       taskViewModel.allTasks.observe(viewLifecycleOwner, Observer { tasks ->
-           tasks?.let {
-               Log.d("ReminderFragment", "Number of tasks: ${it.size}")
-               if(it.isEmpty()) {
-                   showEmptyTaskView()
-               } else {
-                   showRecyclerView(it)
-               }
-           }
-       })
+        val userId = sessionManager.getUserId() // Ambil ID pengguna yang sedang login
+        if (userId == null) {
+            Log.e("ReminderFragment", "ID Pengguna kosong")
+            return // Hentikan pengamatan tugas jika ID pengguna kosong
+        }
+
+        taskViewModel.getTasksByUserId(userId).observe(viewLifecycleOwner, Observer { tasks ->
+            tasks?.let {
+                Log.d("ReminderFragment", "Jumlah tugas: ${it.size}")
+                if(it.isEmpty()) {
+                    showEmptyTaskView()
+                } else {
+                    showRecyclerView(it)
+                }
+            }
+        })
     }
 
     private fun showEmptyTaskView() {

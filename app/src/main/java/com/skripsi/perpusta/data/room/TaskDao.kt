@@ -15,6 +15,9 @@ interface TaskDao {
     @Query("SELECT * FROM tasks")
     fun getAllTasks(): LiveData<List<TaskEntity>>
 
+    @Query("SELECT * FROM tasks WHERE userId = :userId")
+    fun getAllTasksForUser(userId: String): LiveData<List<TaskEntity>>
+
     @Delete
     suspend fun deleteTask(taskEntity: TaskEntity)
 }

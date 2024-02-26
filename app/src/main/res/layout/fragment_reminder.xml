@@ -51,7 +51,7 @@
         app:layout_constraintBottom_toTopOf="@+id/fab"
         app:layout_constraintTop_toBottomOf="@+id/back_reminder"
         tools:listitem="@layout/item_task"
-        android:visibility="visible"/>
+        android:visibility="gone"/>
 
     </FrameLayout>
 

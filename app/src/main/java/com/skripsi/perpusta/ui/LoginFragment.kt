@@ -52,12 +52,12 @@ class LoginFragment : Fragment() {
             val password = binding.password.text.toString()
 
             if (npm.isEmpty() || password.isEmpty()) {
-                Toast.makeText(requireContext(), "Username and password cannot be empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Username and password cannot be empty",
+                    Toast.LENGTH_SHORT).show()
             } else {
                 viewModel.loginUser(npm, password)
             }
         }
-
         observeLoginResult()
     }
 
@@ -87,13 +87,11 @@ class LoginFragment : Fragment() {
                     Toast.makeText(requireContext(), "Login failed", Toast.LENGTH_SHORT).show()
                 }
                 else -> {
-
                 }
             }
         })
 
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

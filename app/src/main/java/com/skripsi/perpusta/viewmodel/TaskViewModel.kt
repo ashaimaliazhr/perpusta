@@ -27,6 +27,10 @@ class TaskViewModel(application: Application) : AndroidViewModel(application)  {
         }
     }
 
+    fun getTasksByUserId(userId: String): LiveData<List<TaskEntity>> {
+        return repository.getAllTasksForUser(userId)
+    }
+
     fun deleteTask(taskEntity: TaskEntity){
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteTask(taskEntity)

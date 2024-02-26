@@ -50,7 +50,7 @@ class ReminderBroadcastReceiver: BroadcastReceiver() {
         val notificationBuilder = NotificationCompat.Builder(context, channelId)
             .setContentTitle(title)
             .setContentText(content)
-            .setSmallIcon(R.drawable.ic_return) // Replace with your notification icon
+            .setSmallIcon(R.drawable.ic_return)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
 
         // Show the notification

@@ -44,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/halo"
                     android:textColor="@color/white"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tv_namaUser"
@@ -52,8 +52,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/nama"
                     android:textColor="@color/white"
-                    android:textSize="26sp"
-                    android:textStyle="bold"/>
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -160,8 +160,6 @@
             <include layout="@layout/content_status" />
 
         </androidx.core.widget.NestedScrollView>
-
-
     </LinearLayout>
 
     <FrameLayout

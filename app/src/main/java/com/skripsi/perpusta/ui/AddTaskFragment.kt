@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.room.Room
 import com.google.android.material.button.MaterialButton
@@ -20,13 +21,13 @@ import com.google.android.material.textfield.TextInputLayout
 import com.skripsi.perpusta.R
 import com.skripsi.perpusta.data.room.AddTaskListener
 import com.skripsi.perpusta.adapter.TaskListAdapter
+import com.skripsi.perpusta.data.datastore.SessionManager
 import com.skripsi.perpusta.data.room.AppDatabase
 import com.skripsi.perpusta.data.room.TaskEntity
 import com.skripsi.perpusta.extensions.ReminderBroadcastReceiver
 import com.skripsi.perpusta.model.task.Task
 import com.skripsi.perpusta.viewmodel.TaskViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -38,6 +39,8 @@ class AddTaskFragment : Fragment(), AddTaskListener {
     private lateinit var tilTitle: TextInputLayout
     private lateinit var tilDate: TextInputLayout
     private lateinit var tilTimer: TextInputLayout
+
+    private lateinit var sessionManager: SessionManager
 
     private lateinit var selectedCalendar: Calendar
     private var selectedReminderTime: Long = 0
@@ -86,6 +89,9 @@ class AddTaskFragment : Fragment(), AddTaskListener {
 
         viewModel = ViewModelProvider(this).get(TaskViewModel::class.java)
         taskListAdapter = TaskListAdapter(viewModel)
+
+        sessionManager = SessionManager(requireContext())
+        val userId = sessionManager.getUserId()
 
     }
 
@@ -144,11 +150,18 @@ class AddTaskFragment : Fragment(), AddTaskListener {
     private fun saveTask() {
         Log.d("AddTaskFragment", "saveTask() called")
 
+        val userId = sessionManager.getUserId() // Mendapatkan ID pengguna yang login
+        if (userId == null) {
+            Log.e("AddTaskFragment", "User ID is null")
+            return // Jika ID pengguna null, hentikan penyimpanan tugas
+        }
+
         val task = Task(
             title = tilTitle.editText?.text.toString(),
             hour = tilTimer.editText?.text.toString(),
             date = tilDate.editText?.text.toString(),
-            reminderTime = selectedReminderTime
+            reminderTime = selectedReminderTime,
+            userId = userId
         )
 
         val taskEntity = TaskEntity(
@@ -156,6 +169,7 @@ class AddTaskFragment : Fragment(), AddTaskListener {
             hour = task.hour,
             date = task.date,
             reminderTime = task.reminderTime,
+            userId = userId // Menyimpan ID pengguna yang login bersama dengan tugas
         )
 
         val database = Room.databaseBuilder(
@@ -164,9 +178,13 @@ class AddTaskFragment : Fragment(), AddTaskListener {
             "task-database"
         ).build()
 
-        GlobalScope.launch(Dispatchers.IO) {
-            database.taskDao().insert(taskEntity)
-            Log.d("AddTaskFragment", "Task inserted into database")
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                database.taskDao().insert(taskEntity)
+                Log.d("AddTaskFragment", "Task inserted into database")
+            } catch (e: Exception){
+                Log.e("AddTaskFragment", "Error inserting task: ${e.message}")
+            }
         }
         viewModel.insertTask(taskEntity)
         Log.d("AddTaskFragment", "Task inserted into ViewModel")

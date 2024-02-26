@@ -3,9 +3,6 @@ package com.skripsi.perpusta.data.datastore
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
-import androidx.lifecycle.LiveData
-import com.skripsi.perpusta.data.room.TaskDao
-import com.skripsi.perpusta.data.room.TaskEntity
 
 class SessionManager (context: Context) {
     private val sharedPreferences : SharedPreferences =
@@ -15,7 +12,7 @@ class SessionManager (context: Context) {
         const val KEY_USER_ID = "user_id"
         const val KEY_TOKEN = "token"
         const val KEY_FULL_NAME = "full_name"
-        const val KEY_NPM = "npm"
+//        const val KEY_NPM = "npm"
     }
 
     fun saveUserData(userId: String, token: String, fullName: String) {
@@ -30,26 +27,34 @@ class SessionManager (context: Context) {
         return sharedPreferences.getString(KEY_USER_ID, null)
     }
 
-    fun getToken(): String? {
-        return sharedPreferences.getString(KEY_TOKEN, null)
-    }
-
     fun getFullName(): String? {
         return sharedPreferences.getString(KEY_FULL_NAME, null)
     }
 
-    fun getNpm(): String? {
-        return sharedPreferences.getString(KEY_NPM, null)
-    }
+//    fun getToken(): String? {
+//        return sharedPreferences.getString(KEY_TOKEN, null)
+//    }
 
-    fun getTasksForLoggedInUser(taskDao: TaskDao): LiveData<List<TaskEntity>> {
-        val loggedInUserId = getUserId()
-        return taskDao.getAllTasks()
-    }
+//    fun getNpm(): String? {
+//        return sharedPreferences.getString(KEY_NPM, null)
+//    }
 
-    fun setLoggedInUserId(userId: String) {
-        sharedPreferences.edit {
-            putString(KEY_USER_ID, userId)
-        }
-    }
+//    fun getTasksForLoggedInUser(taskDao: TaskDao): LiveData<List<TaskEntity>> {
+//        val loggedInUserId = getUserId()
+//        if(loggedInUserId != null) {
+//            return taskDao.getTasksForUser(loggedInUserId)
+//        } else {
+//            return MutableLiveData<List<TaskEntity>>().apply { value = emptyList() }
+//        }
+//    }
+
+//    fun setLoggedInUserId(userId: String) {
+//        sharedPreferences.edit {
+//            putString(KEY_USER_ID, userId)
+//        }
+//    }
+
+//    fun saveUserId(userId: String){
+//        sharedPreferences.edit().putString("userId", userId).apply()
+//    }
 }

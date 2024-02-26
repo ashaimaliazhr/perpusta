@@ -5,6 +5,7 @@ data class Task(
     val hour: String,
     val date: String,
     val reminderTime: Long,
+    val userId: String,
     val id: Int = 0,
 ) {
     override fun equals(other: Any?): Boolean {
