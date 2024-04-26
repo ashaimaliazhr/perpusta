@@ -1,6 +1,7 @@
 package com.skripsi.perpusta.ui
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,7 +20,9 @@ import com.skripsi.perpusta.repository.AuthRepository
 import com.skripsi.perpusta.viewmodel.AuthViewModel
 import com.skripsi.perpusta.viewmodel.ViewModelFactory
 import com.skripsi.perpusta.data.result.Result
+import com.skripsi.perpusta.extensions.ReminderBroadcastReceiver
 import com.skripsi.perpusta.ui.dialogfragment.LoginDialogFragment
+import com.skripsi.perpusta.viewmodel.CirculationViewModel
 
 class LoginFragment : Fragment() {
 
@@ -27,6 +30,7 @@ class LoginFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var navController: NavController
     private lateinit var viewModel: AuthViewModel
+    private lateinit var circulationViewModel: CirculationViewModel
     private val apiService = RemoteDataSource().createApiService()
 
     override fun onCreateView(
@@ -46,6 +50,8 @@ class LoginFragment : Fragment() {
             this,
             ViewModelFactory(AuthRepository(apiService))
         ). get(AuthViewModel::class.java)
+
+        circulationViewModel = ViewModelProvider(this).get(CirculationViewModel::class.java)
 
         binding.loginButton.setOnClickListener {
             val npm = binding.username.text.toString()
@@ -76,12 +82,7 @@ class LoginFragment : Fragment() {
                         val sessionManager = SessionManager(requireContext())
                         sessionManager.saveUserData(userId, token, fullName)
 
-                        LoginDialogFragment.show(parentFragmentManager)
-
-                        view?.postDelayed({
-                            LoginDialogFragment.dismiss(parentFragmentManager)
-                            navController.navigate(R.id.action_loginFragment_to_homeFragment)
-                        }, 2000)
+                        circulationViewModel.fetchDueDate(userId)
                     }
                     is Result.Failure -> {
                     Toast.makeText(requireContext(), "Login failed", Toast.LENGTH_SHORT).show()
@@ -90,6 +91,31 @@ class LoginFragment : Fragment() {
                 }
             }
         })
+
+        circulationViewModel.dueDate.observe(viewLifecycleOwner, { dueDate ->
+            if (!dueDate.isNullOrEmpty()) {
+                val reminderBroadcastReceiver = ReminderBroadcastReceiver()
+                Log.d("LoginFragment", "Scheduling return book notification")
+
+                val intent = Intent(requireContext(), ReminderBroadcastReceiver::class.java).apply {
+                    putExtra("dueDate", dueDate)
+                }
+
+                requireContext().sendBroadcast(intent)
+
+                Log.d("LoginFragment", "Return book notification scheduled successfully")
+                Log.d("LoginFragment", "Received due date: $dueDate")
+
+                LoginDialogFragment.show(parentFragmentManager)
+
+                view?.postDelayed({
+                    LoginDialogFragment.dismiss(parentFragmentManager)
+                    navController.navigate(R.id.action_loginFragment_to_homeFragment)
+                }, 2000)
+            } else {
+                navController.navigate(R.id.action_loginFragment_to_homeFragment)
+            }
+                })
 
     }
     override fun onDestroyView() {

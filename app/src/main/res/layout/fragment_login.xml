@@ -60,8 +60,8 @@
                 android:textColor="@color/white"
                 android:drawablePadding="8dp"
                 android:backgroundTint="@color/light_blue"
-                />
-
+                android:autofillHints="username"
+                android:inputType="text" />
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -75,7 +75,8 @@
                 android:textColor="@color/white"
                 android:drawablePadding="8dp"
                 android:backgroundTint="@color/light_blue"
-                />
+                android:inputType="textPassword"
+                android:autofillHints="" />
 
             <Button
                 android:layout_width="203dp"
@@ -116,6 +117,7 @@
         android:layout_height="200dp"
         android:src="@drawable/anim_login"
         android:scaleType="fitXY"
+        android:contentDescription="@string/img"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>

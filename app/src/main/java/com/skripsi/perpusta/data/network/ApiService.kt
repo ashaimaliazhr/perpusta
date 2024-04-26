@@ -6,7 +6,6 @@ import com.skripsi.perpusta.model.circulation.history.HistoryResponse
 import com.skripsi.perpusta.model.circulation.status.StatusResponse
 import com.skripsi.perpusta.model.login.LoginResponse
 import com.skripsi.perpusta.model.users.UserResponse
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Field

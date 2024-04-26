@@ -86,7 +86,7 @@
                 android:id="@+id/bookBasketDelete"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.2"
+                android:layout_weight="0.05"
                 android:background="@color/chardonnay"
                 android:contentDescription="@string/book_image_description"
                 android:padding="@dimen/padding_small"/>

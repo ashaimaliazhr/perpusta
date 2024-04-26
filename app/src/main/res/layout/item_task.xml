@@ -15,7 +15,7 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="Fazer exercio"/>
+        android:text="@string/title_task"/>
 
     <TextView
         android:id="@+id/tvDate"

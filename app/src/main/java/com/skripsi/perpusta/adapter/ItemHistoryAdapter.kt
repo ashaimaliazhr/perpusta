@@ -1,5 +1,6 @@
 package com.skripsi.perpusta.adapter
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -21,22 +22,19 @@ class ItemHistoryAdapter(
         val tvChkOTime: TextView = itemView.findViewById(R.id.tvChkODate)
         val tvDueDateHistory: TextView = itemView.findViewById(R.id.tvDueDateHistory)
         val tvChkITime: TextView = itemView.findViewById(R.id.tvChkIDate)
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder{
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_history, parent, false)
         return ViewHolder(view)
-
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int){
         val circulationList = currentList
-        if (circulationList != null && circulationList.isNotEmpty()) {
+        if (circulationList.isNotEmpty()) {
             val circulationItem = circulationList[position]
-
             Log.d("ItemHistoryAdapter", "Position: $position, CirculationItem: $circulationItem")
-
             Log.d("ItemHistoryAdapter", "Title: ${circulationItem?.cItem?.eTitBib?.eTit?.titKey}")
             Log.d("ItemHistoryAdapter", "Due Date: ${circulationItem?.chkODate}")
             Log.d("ItemHistoryAdapter", "Fine Amount: ${circulationItem?.dueDate}")
@@ -50,7 +48,7 @@ class ItemHistoryAdapter(
 
     class DiffCallback : DiffUtil.ItemCallback<Data>(){
         override fun areItemsTheSame(oldItem: Data, newItem: Data): Boolean {
-            return oldItem?.iD == newItem.iD
+            return oldItem.iD == newItem.iD
         }
 
         override fun areContentsTheSame(oldItem: Data, newItem: Data): Boolean {

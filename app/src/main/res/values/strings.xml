@@ -9,10 +9,13 @@
     <string name="halo">Hallo,</string>
     <string name="nama">Nama Pengguna</string>
     <string name="cari">Cari Buku</string>
+    <string name="home">Home</string>
+    <string name="circulation">Circulation</string>
+    <string name="reminder">Reminder</string>
+    <string name="account">Account</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="denda">Denda Buku</string>
-    <string name="reminder">Reminder</string>
     <string name="title">Title</string>
     <string name="image">Image</string>
     <string name="book_image_description">desc</string>
@@ -44,7 +47,11 @@
     <string name="cek_buku_dipinjam">cek buku yang Kamu pinjam di Perpustakaan</string>
     <string name="info_denda">Keterlambatan pengembalian buku pada Perpustakaan Universitas Lampung dikenai denda sebesar Rp.500 /hari</string>
     <string name="daftar_buku_dipinjam">Daftar Buku yang Dipinjam</string>
-    <string name="daftar_riwayat_peminjaman_buku">Daftar riwayat peminjaman buku</string>
+    <string name="daftar_riwayat_peminjaman_buku">Daftar Riwayat Peminjaman Buku</string>
     <string name="status_kembali">Status Kembali</string>
-    <string name="logging_in_please_wait">Logging In, Please wait ...</string>
+    <string name="logging_in_please_wait">Logging In, Please wait</string>
+    <string name="design">design</string>
+    <string name="img">img</string>
+    <string name="icon">icon</string>
+    <string name="Nothing_here">Nothing here!</string>
 </resources>

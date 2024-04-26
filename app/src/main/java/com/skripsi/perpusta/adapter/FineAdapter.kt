@@ -1,5 +1,6 @@
 package com.skripsi.perpusta.adapter
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.skripsi.perpusta.R
-import com.skripsi.perpusta.model.circulation.account.AccountResponse
 import com.skripsi.perpusta.model.circulation.account.Data
 
 
@@ -30,17 +30,17 @@ class FineAdapter(
         return ViewHolder(view)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val circulationList = currentList
-        if (circulationList != null && circulationList.isNotEmpty()) {
+        if (circulationList.isNotEmpty()) {
             val circulationItem = circulationList[position]
 
-
             Log.d("FineAdapter", "Position: $position, CirculationItem: $circulationItem")
-
             Log.d("FineAdapter", "Title: ${circulationItem?.cItem?.eTitBib?.eTit?.titKey}")
             Log.d("FineAdapter", "Due Date: ${circulationItem?.chkODate}")
             Log.d("FineAdapter", "Fine Amount: ${circulationItem?.fineAmnt}")
+            
             holder.tvTitleBook.text = circulationItem?.cItem?.eTitBib?.eTit?.titKey
             holder.tvDueDate.text = ("Tanggal Pinjam: " + circulationItem?.chkODate)
             holder.tvFine.text = ("Denda Rp." + circulationItem?.fineAmnt.toString())
@@ -49,7 +49,7 @@ class FineAdapter(
 
     class DiffCallback : DiffUtil.ItemCallback<Data>() {
         override fun areItemsTheSame(oldItem: Data, newItem: Data): Boolean {
-            return oldItem?.iD == newItem.iD
+            return oldItem.iD == newItem.iD
         }
 
         override fun areContentsTheSame(oldItem:Data, newItem: Data): Boolean {

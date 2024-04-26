@@ -34,7 +34,6 @@
                 android:textStyle="bold"/>
         </androidx.appcompat.widget.Toolbar>
 
-
         <RelativeLayout
             android:id="@+id/daftarBuku"
             android:layout_width="match_parent"
@@ -48,7 +47,6 @@
                 android:gravity="start|center"
                 android:layout_toStartOf="@id/animate"
                 android:orientation="vertical">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -57,7 +55,6 @@
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"/>
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -72,6 +69,7 @@
                 android:id="@+id/animate"
                 android:layout_width="180dp"
                 android:layout_height="180dp"
+                android:contentDescription="@string/img"
                 android:layout_alignParentEnd="true"
                 android:layout_centerInParent="true"
                 android:src="@drawable/animate" />
@@ -101,7 +99,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:src="@drawable/ic_empty_image"
-                android:layout_centerInParent="true"
+                android:contentDescription="@string/img"
                 android:visibility="gone"
                 android:orientation="horizontal"
                 android:layout_gravity="center"/>
@@ -111,13 +109,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Nothing here!"
+                android:text="@string/Nothing_here"
                 android:alpha="0.3"
                 android:textColor="#000000"
                 android:layout_below="@id/empty_image"
                 android:layout_centerHorizontal="true"
                 android:visibility="gone"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                tools:ignore="ObsoleteLayoutParam" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvDaftarPinjam"
@@ -153,22 +152,25 @@
                 android:layout_height="100dp"
                 android:src="@drawable/ic_empty_image"
                 android:layout_centerInParent="true"
+                android:contentDescription="@string/Nothing_here"
                 android:visibility="gone"
                 android:orientation="horizontal"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                tools:ignore="ObsoleteLayoutParam" />
 
             <TextView
                 android:id="@+id/empty_message_history"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Nothing here!"
+                android:text="@string/Nothing_here"
                 android:alpha="0.3"
                 android:textColor="#000000"
                 android:layout_below="@id/empty_image"
                 android:layout_centerHorizontal="true"
                 android:visibility="gone"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                tools:ignore="ObsoleteLayoutParam" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvRiwayatPinjam"

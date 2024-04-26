@@ -10,9 +10,7 @@ import java.util.concurrent.TimeUnit
 class RemoteDataSource {
 
     companion object {
-        private const val BASE_URL = "http://192.168.220.209:4000/"
-//            private const val BASE_URL = "http://192.168.104.209:4000/"
-
+        private const val BASE_URL = "http://192.168.181.160:3000/"
     }
 
     private val retrofit = Retrofit.Builder()
@@ -35,7 +33,6 @@ class RemoteDataSource {
             }
             builder.addInterceptor(loggingInterceptor)
         }
-
         return builder.build()
     }
 

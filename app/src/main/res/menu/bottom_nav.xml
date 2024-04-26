@@ -2,21 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_home"
-        android:title="Home"
+        android:title="@string/home"
         android:icon="@drawable/ic_baseline_home_24" />
 
     <item
         android:id="@+id/navigation_circulation"
-        android:title="Circulation"
+        android:title="@string/circulation"
         android:icon="@drawable/ic_baseline_menu_book_24" />
 
     <item
         android:id="@+id/navigation_notifications"
-        android:title="Reminder"
+        android:title="@string/reminder"
         android:icon="@drawable/ic_baseline_calendar_today_24" />
 
     <item
         android:id="@+id/navigation_account"
-        android:title="Account"
+        android:title="@string/account"
         android:icon="@drawable/ic_baseline_person_24" />
 </menu>

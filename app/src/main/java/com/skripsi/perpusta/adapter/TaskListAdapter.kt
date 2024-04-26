@@ -1,5 +1,6 @@
 package com.skripsi.perpusta.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
@@ -12,9 +13,7 @@ import com.skripsi.perpusta.databinding.ItemTaskBinding
 import com.skripsi.perpusta.viewmodel.TaskViewModel
 
 class TaskListAdapter( private val viewModel: TaskViewModel) : ListAdapter<TaskEntity, TaskListAdapter.TaskViewHolder>(DiffCallback()) {
-
     var listenerDelete: (TaskEntity) -> Unit = {}
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -38,6 +37,7 @@ class TaskListAdapter( private val viewModel: TaskViewModel) : ListAdapter<TaskE
             deleteTask(adapterPosition)
         }
 
+        @SuppressLint("SetTextI18n")
         fun bind(item: TaskEntity) {
             binding.tvTitleTask.text = item.title
             binding.tvDate.text = "${item.date} ${item.hour}"

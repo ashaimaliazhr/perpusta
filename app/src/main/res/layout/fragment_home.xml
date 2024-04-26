@@ -10,7 +10,8 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:src="@drawable/bg_rounded_bottom"/>
+        android:src="@drawable/bg_rounded_bottom"
+        android:contentDescription="@string/img"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +31,8 @@
                 android:layout_height="35dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerInParent="true"
-                android:src="@drawable/ic_baseline_login_24"/>
+                android:src="@drawable/ic_baseline_login_24"
+                android:contentDescription="@string/icon"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -74,6 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="20dp"
+                android:contentDescription="@string/icon"
                 android:src="@drawable/ic_baseline_search_24"/>
 
             <TextView
@@ -139,7 +142,8 @@
                     android:layout_height="180dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerInParent="true"
-                    android:src="@drawable/book" />
+                    android:src="@drawable/book"
+                    android:contentDescription="@string/img"/>
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>

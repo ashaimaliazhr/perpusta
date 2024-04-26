@@ -1,5 +1,6 @@
 package com.skripsi.perpusta.adapter
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +21,6 @@ class ItemBorrowAdapter(
             val tvTitleStatus: TextView = itemView.findViewById(R.id.tvTitleStatus)
             val tvTanggalPinjam: TextView =  itemView.findViewById(R.id.tvTanggalPinjam)
             val tvTanggalKembali: TextView = itemView.findViewById(R.id.tvTanggalKembali)
-
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -28,9 +28,10 @@ class ItemBorrowAdapter(
         return ViewHolder(view)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val circulationList = currentList
-        if (circulationList != null && circulationList.isNotEmpty()) {
+        if (circulationList.isNotEmpty()) {
             val circulationItem = circulationList[position]
 
             holder.tvTitleStatus.text = circulationItem?.cItem?.eTitBib?.eTit?.titKey
@@ -45,7 +46,7 @@ class ItemBorrowAdapter(
 
     class DiffCallback : DiffUtil.ItemCallback<Data>() {
         override fun areItemsTheSame(oldItem: Data, newItem: Data): Boolean {
-            return oldItem?.iD == newItem.iD
+            return oldItem.iD == newItem.iD
         }
 
         override fun areContentsTheSame(oldItem: Data, newItem: Data): Boolean {

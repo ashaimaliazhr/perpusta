@@ -3,8 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-
-
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
@@ -49,6 +51,9 @@
                 <action android:name="com.skripsi.perpusta.REMINDER_ACTION" />
             </intent-filter>
         </receiver>
+
+        <receiver android:name="com.skripsi.perpusta.extensions.NotificationReceiver" android:enabled="true"/>
+
     </application>
 
 </manifest>

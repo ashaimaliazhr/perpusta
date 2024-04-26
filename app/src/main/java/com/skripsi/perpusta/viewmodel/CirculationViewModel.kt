@@ -26,6 +26,9 @@ class CirculationViewModel : ViewModel(){
     private val _circulationAccountLength = MutableLiveData<Int>()
     val circulationAccountLength: LiveData<Int> get() = _circulationAccountLength
 
+    private val _dueDate = MutableLiveData<String?>()
+    val dueDate: LiveData<String?> get() = _dueDate
+
     fun getCirculationHistory(npm:  String) {
         val circulationRequest = CirculationRequest(npm = npm)
         viewModelScope.launch {
@@ -98,5 +101,30 @@ class CirculationViewModel : ViewModel(){
         }
     }
 
+    fun fetchDueDate(npm: String){
+        val circulationRequest = CirculationRequest(npm = npm)
+        viewModelScope.launch {
+            try {
+                val apiService = RemoteDataSource().createApiService()
+                val response = apiService.getCirculationStatus(circulationRequest)
 
+                if (response.isSuccessful) {
+                    val statusResponse = response.body()
+                    val dataList = statusResponse?.data
+
+                    val dueDate = dataList?.firstOrNull()?.dueDate
+
+                    if (!dueDate.isNullOrEmpty()) {
+                        _dueDate.value = dueDate
+                    } else {
+                        _dueDate.value = null
+                    }
+                }else {
+                    Log.e("CirculationViewModel", "API error: ${response.message()}")
+                }
+            } catch (e: Exception) {
+                Log.e("CirculationViewModel", "Error: ${e.message}", e)
+            }
+        }
+    }
 }
